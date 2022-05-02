@@ -54,7 +54,6 @@ async function createServer(
   app.use('*', async (req, res) => {
     try {
       const url = req.originalUrl
-      console.log(57);
       let template, render
       if (!isProd) {
         // always read fresh template in dev
@@ -65,9 +64,7 @@ async function createServer(
         template = indexProd
         render = require('./dist/server/entry-server.js').render
       }
-      console.log(68);
       const [appHtml, preloadLinks] = await render(url, manifest)
-      console.log(70);
       const html = template
         .replace(`<!--preload-links-->`, preloadLinks)
         .replace(`<!--app-html-->`, appHtml)
